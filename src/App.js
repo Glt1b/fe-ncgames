@@ -6,6 +6,7 @@ import Users from "./contexts/User.js";
 
 import Header from "./components/Header";
 import ReviewList from "./components/ReviewList"
+import ReviewPage from "./components/ReviewPage"
 
 
 function App() {
@@ -15,7 +16,7 @@ function App() {
   
       <Routes>
         <Route path="/" element={<ReviewList/>} />
-        
+        <Route path="/reviewPage" element={<ReviewPage/>} />
       </Routes>
 
     </div>
