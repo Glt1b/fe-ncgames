@@ -28,7 +28,7 @@ export default function ReviewList() {
         <div>
 
           {reviews.map((item) => {
-            return  <Review key={item.review_id} title={item.title} category={item.category} designer={item.designer}/>
+            return  <Review key={item.review_id} review_id={item.review_id} title={item.title} category={item.category} designer={item.designer}/>
             
           })}
 

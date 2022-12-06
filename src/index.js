@@ -5,13 +5,16 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from "react-router-dom";
 import { UserProvider } from "./contexts/User.js";
+import { CurrReviewProvider } from './contexts/CurrReview';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
     <UserProvider>
-       <App />
+        <CurrReviewProvider>
+             <App />
+        </CurrReviewProvider>
     </UserProvider>
   </BrowserRouter>
     
