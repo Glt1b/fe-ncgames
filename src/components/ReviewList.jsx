@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 
 import { getReviews } from "../api";
 
+import  Review  from "./Review"
+
 
 export default function ReviewList() {
     const [reviews, setReviews] = useState([]);
@@ -26,10 +28,8 @@ export default function ReviewList() {
         <div>
 
           {reviews.map((item) => {
-            return (
-            <div key={item.review_id}>
-             <p>This is review element I am working on now</p>
-            </div> )
+            return  <Review key={item.review_id} title={item.title} category={item.category} designer={item.designer}/>
+            
           })}
 
         </div>
