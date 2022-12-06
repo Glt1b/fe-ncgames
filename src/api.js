@@ -6,7 +6,6 @@ const ncApi = axios.create({
 
 export const getReviews = () => {
     return ncApi.get("/api/reviews").then((res) => {
-        console.log(res.data.reviews)
         return res.data.reviews
     })
 }

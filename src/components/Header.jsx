@@ -7,7 +7,7 @@ export default function Header() {
     return (
         <div className="App-header">
             <h1>Welcome to NC Games</h1>
-            <img src="../img/profileImg.jpg" alt="profile image" />
+            <img id="profileImg" src="../img/profileImg.jpg" alt="profile image" />
             <p>You logged in as <b>{user.username}</b></p>
         </div>
     )
