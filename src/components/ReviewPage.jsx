@@ -13,7 +13,7 @@ export default function ReviewPage() {
         getReviewById(review_id).then((res) => {
             setReview(res.review)
         })
-    }, [])
+    }, [review_id])
 
 
     return (
