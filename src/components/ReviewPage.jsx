@@ -1,14 +1,16 @@
 import { useContext, useState, useEffect } from "react";
 import { CurrReviewContext } from "../contexts/CurrReview";
 import { getReviewById } from "../api";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 export default function ReviewPage() {
-    const { currReview, setCurrReview } = useContext(CurrReviewContext);
+    //const { currReview, setCurrReview } = useContext(CurrReviewContext);
     const [review, setReview] = useState({});
+    const { review_id } = useParams();
+
 
     useEffect(() => {
-        getReviewById(currReview).then((res) => {
+        getReviewById(review_id).then((res) => {
             setReview(res.review)
         })
     }, [])
@@ -17,7 +19,7 @@ export default function ReviewPage() {
     return (
         <div>
            <h2>{review.title}</h2>
-           <img src='review_img_url' className="reviewImg" alt={review.title} /><br/>
+           <img src={review.review_img_url} className="reviewImg" alt={review.title} /><br/>
            <p><b>Category: </b>{review.category}</p>
            <p><b>Designer: </b><i>{review.designer}</i></p>
            <p><b>Owner: </b>{review.owner}</p><br/>
