@@ -7,6 +7,7 @@ export default function ReviewPage() {
     //const { currReview, setCurrReview } = useContext(CurrReviewContext);
     const [review, setReview] = useState({});
     const [comments, setComments] = useState([]);
+    const [isLoaded, setIsLoaded] = useState(false);
     const { review_id } = useParams();
 
 
@@ -14,13 +15,15 @@ export default function ReviewPage() {
         getReviewById(review_id).then((res) => {
             setReview(res.review);
         })
+        setIsLoaded(false)
         getCommentsById(review_id).then((res) => {
             setComments(res);
+            setIsLoaded(true);
         })
     }, [review_id])
 
 
-    return (
+    return ( 
         <div>
            <h2>{review.title}</h2>
            <img src={review.review_img_url} className="reviewImg" alt={review.title} /><br/>
@@ -39,8 +42,7 @@ export default function ReviewPage() {
            <h3>Comments: {comments.length}</h3>
            <br/>
 
-           
-           {comments.map((item) => {
+            { !isLoaded ? <p>Loading...</p> : comments.map((item) => {
             return  (
                 <div className='commentContainer' key={item.comment_id}>
 
@@ -48,10 +50,12 @@ export default function ReviewPage() {
                     <p><b>Author:</b> {item.author}</p>
                     <p><b>Created:</b> {item.created_at}</p>
                     <p><b>Votes: </b> {item.votes}</p>
-
-
-                </div>)
+            
+                </div>)   
           })}
+            
+
+        
 
            
 
