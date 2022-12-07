@@ -15,3 +15,8 @@ export const getReviewById = (review_id) => {
         return res.data
     })
 }
+export const getCommentsById = (review_id) => {
+    return ncApi.get(`/api/reviews/${review_id}/comments`).then((res) => {
+        return res.data.comments
+    })
+}
