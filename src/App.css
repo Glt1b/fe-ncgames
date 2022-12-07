@@ -56,3 +56,8 @@
 .commentContainer {
   border-top: double;
 }
+
+.inputComment {
+  width: 60vh;
+  height: 40px;
+}
