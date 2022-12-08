@@ -4,13 +4,13 @@ const ncApi = axios.create({
   baseURL: "https://easy-jade-crane-tutu.cyclic.app/",
 });
 
-export const getReviews = (category) => {
+export const getReviews = (category, sort, order) => {
     if(!category){
-    return ncApi.get("/api/reviews").then((res) => {
+    return ncApi.get(`/api/reviews?sort=${sort}&order=${order}`).then((res) => {
         return res.data.reviews
     })
     } else {
-        return ncApi.get(`/api/reviews?category=${category}`).then((res) => {
+        return ncApi.get(`/api/reviews?category=${category}&sort=${sort}&order=${order}`).then((res) => {
             return res.data.reviews 
         })
     }

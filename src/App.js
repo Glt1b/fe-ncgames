@@ -2,8 +2,6 @@ import './App.css';
 import { useState, useContext, Children } from "react";
 import { Route, Routes, useParams} from "react-router-dom";
 
-import Users from "./contexts/User.js";
-
 import Header from "./components/Header";
 import ReviewList from "./components/ReviewList"
 import ReviewPage from "./components/ReviewPage"

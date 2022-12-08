@@ -4,7 +4,6 @@ export const QueryContext = createContext();
 
 export const QueryProvider = ({ children }) => {
   const [query, setQuery] = useState({
-    category: null,
     sort_by: 'date',
     order: 'DESC'
   });
