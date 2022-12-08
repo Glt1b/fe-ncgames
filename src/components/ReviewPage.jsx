@@ -48,17 +48,16 @@ export default function ReviewPage() {
    };
 
    const writeComment = (e) => {
-    //e.preventDefault()
-    //setIsUploaded(false);
+    e.preventDefault()
+    setIsUploaded(false);
     postComment(review_id, newComment, user.username).then((res) => {
-        console.log(res)
+        const arr = comments;
+        arr.unshift(res);
+        setComments(arr);
+        setNewComment('');
+        setIsUploaded(true);
     })
    };
-
-   // why it refresh page after every submit
-   // why ther's no response from server
-   // whe it doesn't always add comment 
-
    
 
    const delComment = (comment_id) => {
@@ -88,7 +87,7 @@ export default function ReviewPage() {
            <p><b>Owner: </b>{review.owner}</p><br/>
            <p>{review.review_body}</p><br/>
            <p>Created: {review.created_at}</p><p><b>Votes: </b>{review.votes}       
-           { !voted  ? <button onClick={() => {handleVote()}}>Vote for this review</button> : <button onClick={() => {handleVote()}}>Take back your vote.</button> }
+           { !voted  ? <button onClick={(e) => {handleVote(e)}}>Vote for this review</button> : <button onClick={() => {handleVote()}}>Take back your vote.</button> }
            </p>
            <Link to='/'>
             <br/><button>Back to reviews</button>
@@ -97,7 +96,7 @@ export default function ReviewPage() {
            <br/>
            <h3>Comments: {comments.length}</h3>
            <br/>
-           <form onSubmit={() => {writeComment()}}> 
+           { isUploaded ?  <form onSubmit={writeComment}> 
             <label>Add Comment:</label><br/>
             <input
                className="inputComment"
@@ -106,7 +105,8 @@ export default function ReviewPage() {
                onChange={((e) => {setNewComment(e.target.value)})}
                required ></input><br/>
             <button type="submit">Add</button>
-           </form>
+           </form> : <p>Uploading...</p>}
+          
            <br/>
 
             { !isLoaded ? <p>Loading...</p> : comments.map((item) => {

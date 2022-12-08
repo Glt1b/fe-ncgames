@@ -31,7 +31,7 @@ export const updateVote = (review_id, vote) => {
 export const postComment = (review_id, comment, username) => {
     const body = {username: username, body: comment};
     return ncApi.post(`/api/reviews/${review_id}/comments`, body).then((res) => {
-        return res
+        return res.data.comment
     })
 }
 
