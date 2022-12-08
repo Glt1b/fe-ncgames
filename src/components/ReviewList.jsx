@@ -32,7 +32,6 @@ export default function ReviewList() {
     }, [])
 
     useEffect(() => {
-      console.log(category)
         setIsLoaded(false);
         getReviews(category, sort, order).then((reviews) => {
             setReviews(reviews);

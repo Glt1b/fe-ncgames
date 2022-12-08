@@ -5,15 +5,12 @@ const ncApi = axios.create({
 });
 
 export const getReviews = (category, sort, order) => {
-    if(!category){
-    return ncApi.get(`/api/reviews?sort=${sort}&order=${order}`).then((res) => {
+    
+    
+    return ncApi.get(`/api/reviews`, {params: {category: category, sort_by: sort, order: order}}).then((res) => {
+        console.log(res.data.reviews)
         return res.data.reviews
     })
-    } else {
-        return ncApi.get(`/api/reviews?category=${category}&sort_by=${sort}&order=${order}`).then((res) => {
-            return res.data.reviews 
-        })
-    }
 }
 
 export const getReviewById = (review_id) => {
