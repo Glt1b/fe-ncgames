@@ -4,10 +4,16 @@ const ncApi = axios.create({
   baseURL: "https://easy-jade-crane-tutu.cyclic.app/",
 });
 
-export const getReviews = () => {
+export const getReviews = (category) => {
+    if(!category){
     return ncApi.get("/api/reviews").then((res) => {
         return res.data.reviews
     })
+    } else {
+        return ncApi.get(`/api/reviews?category=${category}`).then((res) => {
+            return res.data.reviews 
+        })
+    }
 }
 
 export const getReviewById = (review_id) => {
@@ -38,5 +44,11 @@ export const postComment = (review_id, comment, username) => {
 export const deleteComment = (comment_id) => {
     return ncApi.delete(`/api/comments/${comment_id}`).then((res) => {
         return res
+    })
+}
+
+export const getCategories = () => {
+    return ncApi.get('/api/categories').then((res) => {
+        return res.data.categories
     })
 }
