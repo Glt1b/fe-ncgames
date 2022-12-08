@@ -10,7 +10,7 @@ export const getReviews = (category, sort, order) => {
         return res.data.reviews
     })
     } else {
-        return ncApi.get(`/api/reviews?category=${category}&sort=${sort}&order=${order}`).then((res) => {
+        return ncApi.get(`/api/reviews?category=${category}&sort_by=${sort}&order=${order}`).then((res) => {
             return res.data.reviews 
         })
     }

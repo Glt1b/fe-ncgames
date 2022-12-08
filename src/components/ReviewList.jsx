@@ -13,7 +13,7 @@ export default function ReviewList() {
     const [categories, setCategories] = useState([]);
     const [reviews, setReviews] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
-    const [sort, setSort] = useState('date');
+    const [sort, setSort] = useState('created_at');
     const [order, setOrder] = useState('DESC')
   
 /*
@@ -32,6 +32,7 @@ export default function ReviewList() {
     }, [])
 
     useEffect(() => {
+      console.log(category)
         setIsLoaded(false);
         getReviews(category, sort, order).then((reviews) => {
             setReviews(reviews);
@@ -55,8 +56,8 @@ export default function ReviewList() {
           })}
 
         </p>
-        <p>Sort by: <button onClick={() => setSort('date')}>date</button>
-        <button onClick={() => setSort('comment_count')}>comment count</button>
+        <p>Sort by: <button onClick={() => setSort('created_at')}>date</button>
+        <button onClick={() => setSort('title')}>Title</button>
         <button onClick={() => setSort('votes')}>votes</button><br/>
         Order: <button onClick={() => setOrder('DESC')}>DESC</button>
         <button onClick={() => setOrder('ASC')}>ASC</button></p>
