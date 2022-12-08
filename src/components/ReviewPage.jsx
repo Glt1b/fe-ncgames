@@ -66,11 +66,10 @@ export default function ReviewPage() {
         setIsDeleted(true);
         if(res.status === 204){
             alert('Your comment has been deleted.')
-            setIsLoaded(false)
-            getCommentsById(review_id).then((res) => {
-              setComments(res);
-              setIsLoaded(true);
-            })
+            
+            const arr = comments.filter((item) => item.comment_id !== comment_id)
+            setComments(arr);
+
         } else {
             alert('Something went wrong, try again.')
         }
