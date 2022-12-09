@@ -2,6 +2,7 @@ import { useContext, useState, useEffect } from "react";
 import { UserContext } from "../contexts/User";
 import { getReviewById, getCommentsById, updateVote, postComment, deleteComment } from "../api";
 import { Link, useParams } from "react-router-dom";
+import ErrorComponent from "./ErrorComponent";
 
 export default function ReviewPage() {
 
@@ -10,9 +11,8 @@ export default function ReviewPage() {
     const [voted, setVoted] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false);
     const [newComment, setNewComment] = useState('');
-
     const [isUploaded, setIsUploaded] = useState(true);
-
+    const [error, setError] = useState(null);
     const [isDeleted, setIsDeleted] = useState(true);
     const { review_id } = useParams();
     const { user, setUser } = useContext(UserContext);
@@ -20,13 +20,18 @@ export default function ReviewPage() {
 
     useEffect(() => {
         getReviewById(review_id).then((res) => {
-            setReview(res.review);
+            setReview(res.review)    
         })
+        .catch((err) => {
+            setError(err.response.data.msg);
+          });
+
         setIsLoaded(false)
         getCommentsById(review_id).then((res) => {
             setComments(res);
             setIsLoaded(true);
         })
+      
     }, [review_id])
 
     useEffect(() => {
@@ -57,6 +62,7 @@ export default function ReviewPage() {
         setNewComment('');
         setIsUploaded(true);
     })
+
    };
    
 
@@ -76,7 +82,9 @@ export default function ReviewPage() {
     })
    };
 
-
+   if (error) {
+    return <ErrorComponent msg={error} />;
+  }
     return ( 
         <div>
            <h2>{review.title}</h2>

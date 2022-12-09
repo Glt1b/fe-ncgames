@@ -8,13 +8,13 @@ export const getReviews = (category, sort, order) => {
     
     
     return ncApi.get(`/api/reviews`, {params: {category: category, sort_by: sort, order: order}}).then((res) => {
-        console.log(res.data.reviews)
         return res.data.reviews
     })
 }
 
 export const getReviewById = (review_id) => {
     return ncApi.get(`/api/reviews/${review_id}`).then((res) => {
+        console.log(res, 'response from backend')
         return res.data
     })
 }
