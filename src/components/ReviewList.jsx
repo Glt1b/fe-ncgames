@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { getReviews, getCategories } from "../api";
 import  Review  from "./Review"
 import { Link, useParams } from "react-router-dom";
+import ErrorComponent from "./ErrorComponent";
 
 //import Dropdown from 'react-dropdown';
 //import 'react-dropdown/style.css';
@@ -15,6 +16,7 @@ export default function ReviewList() {
     const [isLoaded, setIsLoaded] = useState(false);
     const [sort, setSort] = useState('created_at');
     const [order, setOrder] = useState('DESC')
+    const [error, setError] = useState(null);
   
 /*
     const sort = [
@@ -37,9 +39,16 @@ export default function ReviewList() {
             setReviews(reviews);
             setIsLoaded(true);
         })
+        .catch((err) => {
+          setError(err.response.data.msg);
+        });
     }, [currCat, sort, order])
 
-    if (!isLoaded) {
+    if (error) {
+      return <ErrorComponent msg={error} />;
+    }
+
+    if (!isLoaded && !error) {
         return (
           <main>
             <p>Loading....</p>
